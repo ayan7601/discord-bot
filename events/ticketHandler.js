@@ -290,7 +290,7 @@ async function handleTicketModalSubmit(interaction, client) {
 
     try {
         const ticketChannel = await guild.channels.create({
-            name: `${user.username}-${ticketType}`,
+            name: `${ticketType}-${user.username}`,
             type: ChannelType.GuildText,
             parent: config.categoryId || null,
             permissionOverwrites: [
