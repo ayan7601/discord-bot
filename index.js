@@ -19,7 +19,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     await loadEventHandlers(client);
     
     await delay(5000); 
-    require('./bot');
+    require('./shiva');
  
     console.log('\n[WAIT] Stabilizing before bot initialization...\n');
     await initializeBot();

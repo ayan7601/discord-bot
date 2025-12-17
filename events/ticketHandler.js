@@ -317,8 +317,8 @@ async function handleTicketModalSubmit(interaction, client) {
             .setTitle(`${ticketTypeDisplay} Ticket`)
             .setColor('#FF6B00')
             .setDescription(
-                ' **Please provide us with a detailed description of your issue!**\n' +
-                ' **The support staff are human volunteers, so please be patient – you\'ll get an answer as soon as possible.**\n\n' +
+                '❌ **Please provide us with a detailed description of your issue!**\n' +
+                '❌ **The support staff are human volunteers, so please be patient – you\'ll get an answer as soon as possible.**\n\n' +
                 `**The Name Detail Of ${ticketTypeDisplay.toLowerCase()} You Want To Buy.**\n\n` +
                 '```\n' +
                 (reason || '[No reason provided]') + '\n' +
