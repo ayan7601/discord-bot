@@ -83,6 +83,13 @@ module.exports = {
                         .setDescription('Include global stats from all servers')
                         .setRequired(false)))
         .addSubcommand(subcommand =>
+            subcommand.setName('grab')
+                .setDescription('Convert emoji to image file (GIF/PNG) for download')
+                .addStringOption(option =>
+                    option.setName('emoji')
+                        .setDescription('Emoji to grab (name, ID, or paste emoji)')
+                        .setRequired(true)))
+        .addSubcommand(subcommand =>
             subcommand.setName('random')
                 .setDescription('Get random emojis from the server')
                 .addIntegerOption(option =>
@@ -391,6 +398,10 @@ module.exports = {
                 case 'timeline':
                 case 'history':
                     return await this.handleTimeline(interaction, args, isPrefixCommand, sendReply);
+                case 'grab':
+                case 'steal':
+                case 'convert':
+                    return await this.handleGrab(interaction, args, isPrefixCommand, sendReply);
                 case 'lookup':
                 case 'query':
                     return await this.handleLookup(interaction, args, isPrefixCommand, sendReply);
@@ -1878,7 +1889,74 @@ async handleExport(interaction, args, isPrefixCommand, sendReply) {
 
         return sendReply([bulkContainer]);
     },
+    
+    async handleGrab(interaction, args, isPrefixCommand, sendReply) {
+        const query = isPrefixCommand ? args[1] : interaction.options.getString('emoji');
 
+        if (!query) {
+            const errorContainer = new ContainerBuilder()
+                .setAccentColor(0xff0000)
+                .addTextDisplayComponents(
+                    new TextDisplayBuilder()
+                        .setContent(`# ❌ Missing Emoji\n## Invalid Input\n\n> Please provide an emoji to grab\n> Example: /emojis grab :emoji:`)
+                );
+            return sendReply([errorContainer]);
+        }
+
+        let emojiUrl, isAnimated, name;
+        
+        // 1. Try to find in cache (works for server emojis)
+        const emoji = this.findEmoji(interaction.client, query);
+        if (emoji) {
+            isAnimated = emoji.animated;
+            name = emoji.name;
+            emojiUrl = emoji.imageURL({ extension: isAnimated ? 'gif' : 'png', size: 4096 });
+        } else {
+            // 2. Try parsing raw emoji string (works for external emojis if pasted)
+            // Regex matches <a:name:id> or <:name:id>
+            const match = query.match(/<(a)?:(\w+):(\d+)>/);
+            if (match) {
+                isAnimated = Boolean(match[1]);
+                name = match[2];
+                const id = match[3];
+                emojiUrl = `https://cdn.discordapp.com/emojis/${id}.${isAnimated ? 'gif' : 'png'}?size=4096`;
+            }
+        }
+
+        if (!emojiUrl) {
+            const errorContainer = new ContainerBuilder()
+                .setAccentColor(0xff0000)
+                .addTextDisplayComponents(
+                    new TextDisplayBuilder()
+                        .setContent(`# ❌ Emoji Not Found\n## Search Failed\n\n> Could not resolve emoji '${query}'\n> Try using a custom emoji from this server or pasting the emoji directly`)
+                );
+            return sendReply([errorContainer]);
+        }
+
+        const grabContainer = new ContainerBuilder()
+            .setAccentColor(isAnimated ? 0xff6b6b : 0x4ecdc4)
+            .addTextDisplayComponents(
+                new TextDisplayBuilder()
+                    .setContent(`# ${isAnimated ? '🎭' : '🖼️'} Emoji Converted\n## ${name}.${isAnimated ? 'gif' : 'png'}\n\n> **[Click to Download Image](${emojiUrl})**`)
+            )
+            .addSeparatorComponents(
+                new SeparatorBuilder()
+                    .setSpacing(SeparatorSpacingSize.Large)
+            )
+            .addSectionComponents(
+                new SectionBuilder()
+                    .addTextDisplayComponents(
+                        new TextDisplayBuilder()
+                            .setContent(`## 📝 **File Details**\n\n**Name:** \`${name}\`\n**Type:** ${isAnimated ? 'Animated GIF' : 'Static PNG'}\n**Resolution:** Max (4096px)`)
+                    )
+                    .setThumbnailAccessory(
+                        new ThumbnailBuilder()
+                            .setURL(emojiUrl)
+                    )
+            );
+
+        return sendReply([grabContainer]);
+    },
 
     getAllEmojis(client) {
         return client.emojis.cache.map(emoji => ({
