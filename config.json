@@ -4,17 +4,17 @@
     "prefix": "!",
     "mongodbUri": "",
     "excessCommands": {
-        "other": true,
+        "other": false,
         "hentai": false,
         "economy" : false
     },
     "categories": {
-        "media": true,
+        "media": false,
         "basic": true,
         "utility": true,
         "moderation": true,
         "core" :true,
-        "lavalink": true,
+        "lavalink": false,
         "fun": false,
         "distube": false,
         "setups": true,

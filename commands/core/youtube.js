@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+/*const { SlashCommandBuilder } = require('discord.js');
 const {
     TextDisplayBuilder,
     ContainerBuilder,
@@ -790,3 +790,4 @@ async function safeGetPlaylist(url, limit) {
     }
 }
 
+*/

@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, AttachmentBuilder, PermissionFlagsBits } = require('discord.js');
+/*const { SlashCommandBuilder, AttachmentBuilder, PermissionFlagsBits } = require('discord.js');
 const {
     TextDisplayBuilder,
     ContainerBuilder,
@@ -331,3 +331,4 @@ module.exports = {
     }
 };
 
+*/

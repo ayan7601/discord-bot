@@ -12,8 +12,8 @@ const {
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('song-lyrics')
-        .setDescription('Search and get song lyrics')
+        .setName('lyrics')
+        .setDescription('Search and get lyrics of a music')
         .addStringOption(opt =>
             opt.setName('query')
                 .setDescription('Song name or artist (e.g., "shape of you" or "Ed Sheeran")')

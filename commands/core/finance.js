@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+/*const { SlashCommandBuilder } = require('discord.js');
 const {
     ContainerBuilder,
     SectionBuilder,
@@ -569,3 +569,4 @@ module.exports = {
     },
 };
 
+*/

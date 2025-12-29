@@ -1,4 +1,4 @@
-const { 
+/*const { 
     SlashCommandBuilder, 
     ActionRowBuilder, 
     ButtonBuilder, 
@@ -1169,3 +1169,5 @@ async function createPlatformButtons(profile) {
     
     return paginateButtons(buttons);
 }
+
+*/

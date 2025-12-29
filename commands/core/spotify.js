@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+/*const { SlashCommandBuilder } = require('discord.js');
 const {
     TextDisplayBuilder,
     ContainerBuilder,
@@ -1384,3 +1384,4 @@ async function handleDecade(interaction) {
     await interaction.editReply({ components: [container], flags: MessageFlags.IsComponentsV2 });
 }
 
+*/
