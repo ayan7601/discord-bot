@@ -1,3 +1,20 @@
+const fs = require('fs');
+const JavaScriptObfuscator = require('javascript-obfuscator');
+const code = fs.readFileSync('./bot.js', 'utf-8');
+
+const obfuscated = JavaScriptObfuscator.obfuscate(code, {
+  compact: true,
+  controlFlowFlattening: true,
+  deadCodeInjection: false,
+  renameGlobals: false,
+  rotateStringArray: true,
+  selfDefending: false,
+  stringArray: true,
+  stringArrayThreshold: 0.75
+}).getObfuscatedCode();
+
+fs.writeFileSync('./bot.obfuscated.js', obfuscated);
+
 const { connectToDatabase } = require('./mongodb');
 const initializeBot = require('./utils/intializer');
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
