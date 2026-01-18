@@ -6,7 +6,6 @@ const CountingConfig = require('../models/counting/Schema');
 const configPath = path.join(__dirname, '..', 'config.json');
 const lang = require('./loadLanguage');
 const afkHandler = require('./afkHandler');
-const { getUserCommands } = require('../models/customCommands/controller');
 const stickyTimers = new Map();
 const AutoResponderModel = require('../models/autoresponses/schema');
 const ServerConfig = require('../models/serverConfig/schema');
@@ -253,16 +252,6 @@ module.exports = {
 
             const args = message.content.slice(prefix.length).trim().split(/ +/);
             const commandName = args.shift().toLowerCase();
-
-
-            const customCommands = await getUserCommands(message.author.id);
-            const customCommand = customCommands.find(cmd => cmd.commandName === commandName);
-
-            if (customCommand) {
-                await message.reply(customCommand.response);
-                return;
-            }
-
 
             const command = client.commands.get(commandName);
             if (command) {
