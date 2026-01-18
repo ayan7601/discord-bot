@@ -310,7 +310,7 @@ module.exports = async (client) => {
         }
     });
 
-    client.on('ready', () => {
+    client.on('clientReady', () => {
         //console.log('\x1b[36m[ NQN ]\x1b[0m', '\x1b[32mNQN Module Active with Enhanced Features ✅\x1b[0m');
     });
 

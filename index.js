@@ -9,7 +9,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
         if (client.isReady()) {
             resolve();
         } else {
-            client.once('ready', resolve);
+            client.once('clientReady', resolve);
         }
     });
     

@@ -733,13 +733,13 @@ const handleSelectMenu = async (interaction) => {
 module.exports = (client) => {
   setupIntervals(client);
   
-  client.on('ready', async () => {
+  client.on('clientReady', async () => {
     try {
       await loadConfig();
       await checkOutdatedCentralizedControls(client);
       client.guilds.cache.forEach(guild => sendOrUpdateCentralizedEmbed(client, guild));
     } catch (error) {
-      console.error('Error during ready event:', error);
+      console.error('Error during clientReady event:', error);
     }
   });
 

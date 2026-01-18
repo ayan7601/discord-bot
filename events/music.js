@@ -1818,7 +1818,7 @@ module.exports = (client) => {
             try {
                 if (!client.isReady()) {
                     //console.log('\x1b[33m[ V2 LAVALINK ]\x1b[0m Waiting for client to be ready...');
-                    await new Promise(resolve => client.once('ready', resolve));
+                    await new Promise(resolve => client.once('clientReady', resolve));
                 }
 
                 //console.log('\x1b[34m[ V2 LAVALINK ]\x1b[0m Client ready, initializing Riffy...');

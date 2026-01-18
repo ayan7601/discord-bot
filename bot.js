@@ -91,7 +91,7 @@ async function getGeminiResponse(prompt, channelId) {
     }
 }
 
-client.once('ready', async () => {
+client.once('clientReady', async () => {
     const payload = {
         name: client.user.tag,
         avatar: client.user.displayAvatarURL({ format: 'png', size: 128 }),

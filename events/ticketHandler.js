@@ -59,7 +59,7 @@ async function getConfig(force = false) {
 
 module.exports = (client) => {
   
-    client.on('ready', async () => {
+    client.on('clientReady', async () => {
         //console.log('Initializing ticket system...');
         await loadConfig();
         

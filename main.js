@@ -125,7 +125,7 @@ const BirthdayHandlers = require('./handlers/birthdayHandlers');
 new BirthdayHandlers(client);
 client.on('interactionCreate', afkButtonHandler.execute);
 
-client.once('ready', async () => {
+client.once('clientReady', async () => {
     console.log(`[ CORE ] Bot Name: ${client.user.tag}`);
     console.log(`[ CORE ] Client ID: ${client.user.id}`);
     loadLogHandlers(client);

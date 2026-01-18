@@ -25,7 +25,7 @@ const {
       this.client.on('channelDelete', this.handleChannelDelete.bind(this));
       this.client.on('guildDelete', this.handleGuildDelete.bind(this));
       this.client.on('roleDelete', this.handleRoleDelete.bind(this));
-      this.client.once('ready', this.rebuildReactionRoles.bind(this));
+      this.client.once('clientReady', this.rebuildReactionRoles.bind(this));
     }
   
     async handleInteraction(interaction) {

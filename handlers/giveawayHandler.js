@@ -9,7 +9,7 @@ const {
 
 module.exports = (client) => {
   // Load giveaways on bot ready
-  client.once('ready', async () => {
+  client.once('clientReady', async () => {
     //console.log('🎉 Giveaway system initialized');
     
     // Start giveaway checker

@@ -208,7 +208,7 @@ module.exports = (client) => {
   if (client.isReady()) {
     statsService.startStatsUpdater();
   } else {
-    client.once('ready', () => {
+    client.once('clientReady', () => {
       //console.log('[StatsEvents] Client ready, starting stats updater...');
       statsService.startStatsUpdater();
     });
