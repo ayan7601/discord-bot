@@ -5,7 +5,6 @@
     "mongodbUri": "",
     "excessCommands": {
         "other": false,
-        "hentai": true,
         "economy" : false
     },
     "categories": {
